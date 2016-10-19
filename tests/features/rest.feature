@@ -36,5 +36,12 @@ Feature: RESTful paradigm check
   Scenario: Getting an existing note returns application/json content type
   @wip
   Scenario: Getting notes collection
+    When I send a GET request to "notes"
+    And print response
+    Then the response code should be 200
+    And the response should contain json:
+    """
+    [{"id":"1","note":"one"},{"id":"2","note":"two"},{"id":"3","note":"three"}]
+    """
   @wip
   Scenario: Getting notes collection when it is empty
