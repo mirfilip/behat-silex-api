@@ -15,11 +15,11 @@ Feature: RESTful paradigm check
   Scenario: Getting an existing note
     When I send a GET request to "notes/2"
     Then the response code should be 200
-    And the response should contain json:
+    And the response should be json:
     """
     {
       "id": "2",
-      "note": "two"
+      "note": "two-modified"
     }
     """
 
@@ -34,7 +34,9 @@ Feature: RESTful paradigm check
   @wip @restless
   #TODO
   Scenario: Getting an existing note returns application/json content type
+
   @wip
   Scenario: Getting notes collection
+
   @wip
   Scenario: Getting notes collection when it is empty

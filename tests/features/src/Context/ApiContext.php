@@ -1,10 +1,7 @@
 <?php
 namespace Behat\Context;
 
-use Behat\Behat\Tester\Exception\PendingException;
-use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
-use Behat\Gherkin\Node\TableNode;
 use Behat\WebApiExtension\Context\WebApiContext;
 
 /**
@@ -12,4 +9,15 @@ use Behat\WebApiExtension\Context\WebApiContext;
  */
 class ApiContext extends WebApiContext
 {
+    /**
+     * @Then /^(?:the )?response should be json:$/
+     * @param PyStringNode $expected
+     *
+     * @throws \Exception
+     */
+    public function responseShouldBeJson(PyStringNode $expected)
+    {
+        //TODO: Improve that
+        assert(json_encode(json_decode($expected)) === $this->response->getBody()->getContents());
+    }
 }
