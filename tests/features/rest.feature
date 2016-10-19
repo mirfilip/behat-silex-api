@@ -19,7 +19,7 @@ Feature: RESTful paradigm check
     """
     {
       "id": "2",
-      "note": "two-modified"
+      "note": "two"
     }
     """
 
@@ -27,3 +27,14 @@ Feature: RESTful paradigm check
   Scenario: Getting a not existing note
     When I send a GET request to "notes/100000"
     Then the response code should be 404
+
+  @wip @restless
+  Scenario: Getting an existing note with different Accept header
+
+  @wip @restless
+  #TODO
+  Scenario: Getting an existing note returns application/json content type
+  @wip
+  Scenario: Getting notes collection
+  @wip
+  Scenario: Getting notes collection when it is empty
