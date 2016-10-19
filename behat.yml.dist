@@ -1,0 +1,15 @@
+default:
+  gherkin:
+    filters:
+      tags: ~@wip
+
+  extensions:
+    Behat\WebApiExtension:
+      base_url: localhost:9001/api/v1/
+
+  suites:
+    default:
+      paths:
+        - %paths.base%/tests/features
+      contexts:
+        - Behat\Context\ApiContext
