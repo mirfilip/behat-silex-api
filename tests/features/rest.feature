@@ -4,13 +4,11 @@ Feature: RESTful paradigm check
   The service needs to respond in a RESTful manner
 
   We interact with the allegedly RESTful API with a domain object: notes
-
-  We interact with the allegedly RESTful API with a domain object: notes
-  GET  ->   http://localhost:9001/api/v1/notes
-  GET  ->   http://localhost:9001/api/v1/notes/{id}
-  POST ->   http://localhost:9001/api/v1/notes
-  PUT ->   http://localhost:9001/api/v1/notes/{id}
-  DELETE -> http://localhost:9001/api/v1/notes/{id}
+    GET  ->   http://localhost:9001/api/v1/notes
+    GET  ->   http://localhost:9001/api/v1/notes/{id}
+    POST ->   http://localhost:9001/api/v1/notes
+    PUT ->   http://localhost:9001/api/v1/notes/{id}
+    DELETE -> http://localhost:9001/api/v1/notes/{id}
 
   Background:
     Given the fixture notes are in database
@@ -26,13 +24,16 @@ Feature: RESTful paradigm check
     }
     """
 
-  @wip @restless
+  @restless
   Scenario: Getting a not existing note
     When I send a GET request to "notes/100000"
     Then the response code should be 404
 
-  @wip @restless
+  @restless
   Scenario: Getting an existing note with different Accept header
+    Given I set header "Accept" with value "text/html"
+    When I send a GET request to "notes/1"
+    Then the response code should be 406
 
   @wip @restless
   #TODO

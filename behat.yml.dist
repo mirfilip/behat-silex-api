@@ -1,7 +1,7 @@
 default:
   gherkin:
     filters:
-      tags: ~@wip
+      tags: ~@wip && ~@restless
 
   extensions:
     Behat\WebApiExtension:
