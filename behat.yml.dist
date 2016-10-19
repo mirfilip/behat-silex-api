@@ -13,3 +13,4 @@ default:
         - %paths.base%/tests/features
       contexts:
         - Behat\Context\ApiContext
+        - Behat\Context\DatabaseContext
