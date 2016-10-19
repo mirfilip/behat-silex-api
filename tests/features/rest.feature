@@ -12,6 +12,9 @@ Feature: RESTful paradigm check
   PUT ->   http://localhost:9001/api/v1/notes/{id}
   DELETE -> http://localhost:9001/api/v1/notes/{id}
 
+  Background:
+    Given the fixture notes are in database
+
   Scenario: Getting an existing note
     When I send a GET request to "notes/2"
     Then the response code should be 200
@@ -35,15 +38,32 @@ Feature: RESTful paradigm check
   #TODO
   Scenario: Getting an existing note returns application/json content type
 
-  @wip
   Scenario: Getting notes collection
     When I send a GET request to "notes"
-    And print response
     Then the response code should be 200
     And the response should contain json:
     """
-    [{"id":"1","note":"one"},{"id":"2","note":"two"},{"id":"3","note":"three"}]
+    [
+      {
+        "id": "1",
+        "note": "one"
+      },
+      {
+        "id": "2",
+        "note": "two"
+      },
+      {
+        "id": "3",
+        "note": "three"
+      }
+    ]
     """
 
-  @wip
   Scenario: Getting notes collection when it is empty
+    Given there are no notes
+    When I send a GET request to "notes"
+    Then the response code should be 200
+    And the response should be json:
+    """
+    []
+    """
