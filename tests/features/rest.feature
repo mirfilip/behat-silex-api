@@ -23,7 +23,7 @@ Feature: RESTful paradigm check
     }
     """
 
-  @wip @samjestesrest
+  @wip @restless
   Scenario: Getting a not existing note
     When I send a GET request to "notes/100000"
     Then the response code should be 404
