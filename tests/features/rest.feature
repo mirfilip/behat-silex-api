@@ -4,3 +4,26 @@ Feature: RESTful paradigm check
   The service needs to respond in a RESTful manner
 
   We interact with the allegedly RESTful API with a domain object: notes
+
+  We interact with the allegedly RESTful API with a domain object: notes
+  GET  ->   http://localhost:9001/api/v1/notes
+  GET  ->   http://localhost:9001/api/v1/notes/{id}
+  POST ->   http://localhost:9001/api/v1/notes
+  PUT ->   http://localhost:9001/api/v1/notes/{id}
+  DELETE -> http://localhost:9001/api/v1/notes/{id}
+
+  Scenario: Getting an existing note
+    When I send a GET request to "notes/2"
+    Then the response code should be 200
+    And the response should contain json:
+    """
+    {
+      "id": "2",
+      "note": "two-modified"
+    }
+    """
+
+  @wip @samjestesrest
+  Scenario: Getting a not existing note
+    When I send a GET request to "notes/100000"
+    Then the response code should be 404
