@@ -19,7 +19,7 @@ Feature: RESTful paradigm check
     """
     {
       "id": "2",
-      "note": "two-modified"
+      "note": "two"
     }
     """
 
