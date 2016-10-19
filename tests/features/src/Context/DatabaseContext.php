@@ -10,12 +10,27 @@ use Behat\Behat\Context\Context;
 class DatabaseContext implements Context
 {
     /**
+     * @var string
+     */
+    private $projectRoot;
+    /**
+     * @var string
+     */
+    private $dbPath;
+
+    public function __construct()
+    {
+        $this->projectRoot = realpath(__DIR__ . '/../../../../');
+        $this->dbPath = $this->projectRoot . '/app.db';
+    }
+
+    /**
      * @Given there are no notes
      */
     public function truncateDatabase()
     {
-        $truncateCommand = __DIR__ . '/truncate.sql';
-        @exec("sqlite3 app.db < $truncateCommand");
+        $truncateCommand = $this->projectRoot . '/resources/sql/truncate.sql';
+        @exec('sqlite3 ' . $this->dbPath . "< $truncateCommand");
     }
 
     /**
@@ -23,8 +38,8 @@ class DatabaseContext implements Context
      */
     public function setupDatabase()
     {
-        @exec("rm app.db");
-        $truncateCommand = __DIR__ . '/schema.sql';
-        @exec("sqlite3 app.db < $truncateCommand");
+        @exec('rm -f ' . $this->dbPath);
+        $truncateCommand = $this->projectRoot . '/resources/sql/schema.sql';
+        @exec('sqlite3 ' . $this->dbPath . "< $truncateCommand");
     }
 }
